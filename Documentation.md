@@ -118,3 +118,14 @@ Click **Plugins** in the top bar to inspect or toggle registered plugins:
 | `T` | Text tool |
 | `I` | Eyedropper color picker |
 | `Space` | Play / Pause motion timeline |
+
+---
+
+## 11. Distributions & Standalone Android APK
+
+Every build of Vector Studio produces a persistent release inside `/distribution/{major.minor.release-codename}`:
+- **Never Ignored by Git**: Git tracking is explicitly enabled for all distributions via `!/distribution/**` in `.gitignore`.
+- **Standalone Android APK**: Bundled with native Android manifest, `classes.dex`, launcher icons, and signed certificates at `/distribution/{version}/android/vector_studio-{version}.apk`.
+- **Compiled Web App**: Preserved under `/distribution/{version}/app/`.
+- **Technical Documentation Artifacts**: `Components.md`, `Architecture.md`, and `Documentation.md` are copied on every build into `/distribution/{version}/docs/`.
+

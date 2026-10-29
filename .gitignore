@@ -6,3 +6,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Always keep and track distribution releases, APKs, and artifacts
+!/distribution
+!/distribution/**

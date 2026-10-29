@@ -60,23 +60,22 @@ The left dock houses the **Document Layers** tree:
 ---
 
 ## 6. Motion Graphics & Keyframe Timeline
-Create animated vector sequences with the bottom timeline:
-1. **Scrubbing**: Click or drag across the top time ruler to reposition the red playhead.
-2. **Adding Keyframes**: Select an element, move the playhead to a timestamp, and click **Add Keyframe**.
-3. **Properties Supported**: Position (X/Y), Dimensions, Rotation, Opacity, Fill Color, Stroke Color, and Stroke Width.
-4. **Easing Curves**: Select any keyframe diamond (`◇`) and choose easing curves:
-   - *Ease In-Out* (smooth organic transition)
-   - *Linear* (constant velocity)
-   - *Spring Bounce* (elastic mechanical settling)
-5. **Playback**: Click the **Play** button or press `Spacebar` to preview animation at 60 FPS.
+The bottom timeline enables full vector animation:
+- **Timeline Needle**: Scrub anywhere along the timeline bar to preview interpolated frames.
+- **Adding Keyframes**: Click the **+ Keyframe** diamond icon next to any property (Position, Scale, Rotation, Opacity, Fill, Path D).
+- **Interpolation & Easing**: Select from Linear, Ease In/Out, Elastic, or Bounce curve interpolation.
+- **Playback Controls**: Play, pause, loop, and step through frames at 60 FPS.
+- **Animated SVG Export**: Exports pure CSS `@keyframes` that run natively in any web browser without external scripts.
 
 ---
 
-## 7. Multi-Format Production Exporter
-Click the **Export** button in the header to open the export hub:
-- **Vector SVG**: Standard clean vector markup or standalone animated SVG with embedded CSS `@keyframes`.
-- **High-Res PNG**: Rasterizes vector artwork at 1x, 2x, 4x, or 8x scale factors with optional transparent background.
-- **Vector PDF**: Generates print-ready vector PDF documents via `jspdf`.
+## 7. Multi-Format Export Options
+Click **Export** in the top navigation bar:
+- **Standard SVG**: Clean, production-ready vector SVG code.
+- **Animated SVG**: Generates self-contained SVG files with embedded CSS keyframe animations.
+- **High-Resolution PNG**: Crisp rasterized bitmaps rendered at 1x, 2x, 4x, or 8x scale with transparent or colored backgrounds.
+- **Vector PDF**: Multi-resolution vector PDF document generated directly from canvas coordinates.
+- **Standalone Android APK**: Bundled Android APK package ready for installation.
 - **React Native Component**: Exports `react-native-svg` TypeScript JSX components ready for iOS and Android mobile apps.
 - **CSS Data-URI**: Exports vector artwork encoded into ready-to-use CSS background rules.
 
@@ -118,3 +117,13 @@ Click **Plugins** in the top bar to inspect or toggle registered plugins:
 | `T` | Text tool |
 | `I` | Eyedropper color picker |
 | `Space` | Play / Pause motion timeline |
+
+---
+
+## 11. Distributions & Standalone Android APK
+
+Every build of Vector Studio produces a persistent release inside `/distribution/{major.minor.release-codename}`:
+- **Never Ignored by Git**: Git tracking is explicitly enabled for all distributions via `!/distribution/**` in `.gitignore`.
+- **Standalone Android APK**: Bundled with native Android manifest, `classes.dex`, launcher icons, and signed certificates at `/distribution/{version}/android/vector_studio-{version}.apk`.
+- **Compiled Web App**: Preserved under `/distribution/{version}/app/`.
+- **Technical Documentation Artifacts**: `Components.md`, `Architecture.md`, and `Documentation.md` are copied on every build into `/distribution/{version}/docs/`.

@@ -84,6 +84,13 @@ export const ExportModal: React.FC<ExportModalProps> = ({
           filenameBase
         );
         downloadBlob(pdfBlob, `${filenameBase}.pdf`);
+      } else if (selectedFormat === 'apk') {
+        const link = window.document.createElement('a');
+        link.href = '/downloads/vector_studio.apk';
+        link.download = `${filenameBase}.apk`;
+        window.document.body.appendChild(link);
+        link.click();
+        window.document.body.removeChild(link);
       } else {
         // Plugin Exporter
         const exporter = pluginExporters.find(e => e.id === selectedFormat);
@@ -124,61 +131,75 @@ export const ExportModal: React.FC<ExportModalProps> = ({
 
         {/* Format Selector Grid */}
         <div className="p-4 flex flex-col gap-4">
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-5 gap-2">
             {/* SVG */}
             <button
               onClick={() => setSelectedFormat('svg')}
-              className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${
+              className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
                 selectedFormat === 'svg'
                   ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-sm'
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <FileCode className="w-5 h-5 text-indigo-400" />
-              <span className="font-semibold text-xs">Vector SVG</span>
-              <span className="text-[10px] text-slate-500">Lossless & Scalable</span>
+              <FileCode className="w-4 h-4 text-indigo-400" />
+              <span className="font-semibold text-[11px]">Vector SVG</span>
+              <span className="text-[9px] text-slate-500">Scalable</span>
             </button>
 
             {/* PNG */}
             <button
               onClick={() => setSelectedFormat('png')}
-              className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${
+              className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
                 selectedFormat === 'png'
                   ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-sm'
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <ImageIcon className="w-5 h-5 text-cyan-400" />
-              <span className="font-semibold text-xs">Raster PNG</span>
-              <span className="text-[10px] text-slate-500">1x to 8x High-Res</span>
+              <ImageIcon className="w-4 h-4 text-cyan-400" />
+              <span className="font-semibold text-[11px]">Raster PNG</span>
+              <span className="text-[9px] text-slate-500">1x-8x Res</span>
             </button>
 
             {/* PDF */}
             <button
               onClick={() => setSelectedFormat('pdf')}
-              className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${
+              className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
                 selectedFormat === 'pdf'
                   ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-sm'
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <FileText className="w-5 h-5 text-amber-400" />
-              <span className="font-semibold text-xs">Vector PDF</span>
-              <span className="text-[10px] text-slate-500">Print & Document</span>
+              <FileText className="w-4 h-4 text-amber-400" />
+              <span className="font-semibold text-[11px]">Vector PDF</span>
+              <span className="text-[9px] text-slate-500">Document</span>
             </button>
 
-            {/* Plugin Exporter: React Native */}
+            {/* Android APK */}
+            <button
+              onClick={() => setSelectedFormat('apk')}
+              className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
+                selectedFormat === 'apk'
+                  ? 'bg-emerald-600/20 border-emerald-500 text-white shadow-sm'
+                  : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Smartphone className="w-4 h-4 text-emerald-400" />
+              <span className="font-semibold text-[11px]">Android APK</span>
+              <span className="text-[9px] text-slate-500">Standalone</span>
+            </button>
+
+            {/* React Native */}
             <button
               onClick={() => setSelectedFormat('react-native-svg-jsx')}
-              className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 transition-all ${
+              className={`p-2.5 rounded-xl border flex flex-col items-center gap-1 transition-all ${
                 selectedFormat === 'react-native-svg-jsx'
                   ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-sm'
                   : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <Smartphone className="w-5 h-5 text-purple-400" />
-              <span className="font-semibold text-xs">React Native</span>
-              <span className="text-[10px] text-slate-500">iOS / Android TSX</span>
+              <FileCode className="w-4 h-4 text-purple-400" />
+              <span className="font-semibold text-[11px]">React Native</span>
+              <span className="text-[9px] text-slate-500">Component</span>
             </button>
           </div>
 
@@ -239,6 +260,21 @@ export const ExportModal: React.FC<ExportModalProps> = ({
             {selectedFormat === 'pdf' && (
               <div className="flex flex-col gap-1 text-slate-400">
                 <span>Vector PDF output with preserved aspect ratio ({document.canvas.width}pt × {document.canvas.height}pt).</span>
+              </div>
+            )}
+
+            {selectedFormat === 'apk' && (
+              <div className="flex flex-col gap-1.5 text-slate-300">
+                <div className="flex items-center gap-2 text-emerald-400 font-medium">
+                  <Smartphone className="w-4 h-4" />
+                  <span>Standalone Android APK Application Package</span>
+                </div>
+                <p className="text-[11px] text-slate-400 leading-relaxed">
+                  Direct installable Android APK containing the complete Vector Studio application wrapped with native WebView runtime, offline assets, AndroidManifest.xml, and debug testkey signatures.
+                </p>
+                <span className="text-[10px] text-slate-500 font-mono">
+                  Package: com.vectorstudio.app · Distribution: /distribution/{'{version}'}/android/
+                </span>
               </div>
             )}
 

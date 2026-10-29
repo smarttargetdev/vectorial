@@ -20,6 +20,8 @@ import { Timeline } from './components/Timeline';
 import { AiAssistantModal } from './components/AiAssistantModal';
 import { ExportModal } from './components/ExportModal';
 import { PluginManagerModal } from './components/PluginManagerModal';
+import { DocsModal, DocTab } from './components/DocsModal';
+import { AboutModal } from './components/AboutModal';
 import { sampleCyberEmblem } from './utils/sampleDocuments';
 import { nodesToSvgString, svgStringToNodes, generateId, downloadBlob } from './utils/svgParser';
 import { HistoryManager } from './utils/history';
@@ -38,6 +40,9 @@ export default function App() {
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
   const [isPluginModalOpen, setIsPluginModalOpen] = useState(false);
+  const [isDocsModalOpen, setIsDocsModalOpen] = useState(false);
+  const [activeDocTab, setActiveDocTab] = useState<DocTab>('documentation');
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
 
   // Toast notification state
   const [toast, setToast] = useState<{ message: string; type: 'info' | 'success' | 'warning' | 'error' } | null>(null);
@@ -480,6 +485,11 @@ export default function App() {
         onOpenExportModal={() => setIsExportModalOpen(true)}
         onOpenAiModal={() => setIsAiModalOpen(true)}
         onOpenPluginModal={() => setIsPluginModalOpen(true)}
+        onOpenHelpDoc={(tab) => {
+          setActiveDocTab(tab);
+          setIsDocsModalOpen(true);
+        }}
+        onOpenAbout={() => setIsAboutModalOpen(true)}
         onDeleteSelected={handleDeleteSelected}
         onDuplicateSelected={handleDuplicateSelected}
       />
@@ -625,6 +635,21 @@ export default function App() {
           defaultPluginRegistry.togglePlugin(pluginId);
           setHistoryTick(t => t + 1);
           notify('Plugin state updated', 'info');
+        }}
+      />
+
+      <DocsModal
+        isOpen={isDocsModalOpen}
+        onClose={() => setIsDocsModalOpen(false)}
+        initialTab={activeDocTab}
+      />
+
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
+        onOpenDocs={(tab) => {
+          setActiveDocTab(tab);
+          setIsDocsModalOpen(true);
         }}
       />
     </div>

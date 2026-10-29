@@ -1,0 +1,23 @@
+{
+  "application": "Vector Studio",
+  "version": "1.0.1-genesis",
+  "releaseCodename": "genesis",
+  "major": 1,
+  "minor": 0,
+  "release": 1,
+  "buildTimestamp": "2026-10-29T16:16:52.724Z",
+  "targetPlatforms": [
+    "web",
+    "macos",
+    "windows",
+    "linux",
+    "ios",
+    "android"
+  ],
+  "artifacts": [
+    "Components.md",
+    "Architecture.md",
+    "Documentation.md"
+  ],
+  "distributionPath": "/app/applet/distribution/1.0.1-genesis"
+}

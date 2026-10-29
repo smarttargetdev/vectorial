@@ -59,7 +59,7 @@ Guidelines:
     }
 
     const response = await ai.models.generateContent({
-      model: 'gemini-4-argon',
+      model: 'gemini-3.8-flash',
       contents: userContent,
       config: {
         systemInstruction,
@@ -108,7 +108,7 @@ app.post('/api/gemini/optimize-svg', async (req: Request, res: Response): Promis
     const ai = getGenAI();
 
     const response = await ai.models.generateContent({
-      model: 'gemini-4-argon',
+      model: 'gemini-3.8-flash',
       contents: `Clean, optimize, and mathematically simplify the following SVG while preserving visual fidelity. Remove redundant nested <g> tags, normalize decimal precisions to 2 decimal places, simplify path strings, and ensure valid well-formed XML:\n\n${svgCode}`,
       config: {
         systemInstruction: 'You are an SVG optimization engine. Output ONLY the cleaned SVG inside an ```xml code block.',
@@ -136,6 +136,18 @@ app.post('/api/gemini/optimize-svg', async (req: Request, res: Response): Promis
 
 app.get('/api/health', (_req: Request, res: Response) => {
   res.json({ status: 'ok', service: 'Vectura Studio API' });
+});
+
+import fs from 'fs';
+
+app.use('/downloads', express.static(path.resolve(__dirname, 'public', 'downloads')));
+app.get('/api/download/android-apk', (_req: Request, res: Response) => {
+  const apkPath = path.resolve(__dirname, 'public', 'downloads', 'vector_studio.apk');
+  if (fs.existsSync(apkPath)) {
+    res.download(apkPath, 'vector_studio.apk');
+  } else {
+    res.status(404).json({ error: 'Android APK not found' });
+  }
 });
 
 // Setup Vite middleware in dev or static files in production

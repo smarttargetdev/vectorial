@@ -16,7 +16,11 @@ import {
   Copy, 
   Trash2,
   Columns,
-  Code2
+  Code2,
+  HelpCircle,
+  Info,
+  BookOpen,
+  Cpu
 } from 'lucide-react';
 import { ViewMode, PlatformPreset, ProjectDocument } from '../types/editor';
 import { sampleCyberEmblem, sampleSolarOrbit } from '../utils/sampleDocuments';
@@ -40,6 +44,8 @@ interface HeaderProps {
   onOpenExportModal: () => void;
   onOpenAiModal: () => void;
   onOpenPluginModal: () => void;
+  onOpenHelpDoc: (tab: 'documentation' | 'architecture' | 'components') => void;
+  onOpenAbout: () => void;
   onDeleteSelected: () => void;
   onDuplicateSelected: () => void;
 }
@@ -63,6 +69,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenExportModal,
   onOpenAiModal,
   onOpenPluginModal,
+  onOpenHelpDoc,
+  onOpenAbout,
   onDeleteSelected,
   onDuplicateSelected,
 }) => {
@@ -94,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({
             V
           </div>
           <span className="font-bold tracking-tight text-slate-100 text-sm whitespace-nowrap">
-            Vectura Studio
+            Vector Studio
           </span>
         </div>
 
@@ -226,6 +234,56 @@ export const Header: React.FC<HeaderProps> = ({
             <Puzzle className="w-3.5 h-3.5 text-indigo-400" />
             <span>Plugins</span>
           </button>
+
+          {/* Help Menu */}
+          <div className="relative">
+            <button
+              onClick={() => setActiveMenu(activeMenu === 'help' ? null : 'help')}
+              className={`px-2.5 py-1 rounded hover:bg-slate-800 transition-colors flex items-center gap-1.5 ${activeMenu === 'help' ? 'bg-slate-800 text-white' : 'text-slate-300'}`}
+            >
+              <HelpCircle className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Help</span>
+            </button>
+            {activeMenu === 'help' && (
+              <>
+                <div className="fixed inset-0 z-40" onClick={() => setActiveMenu(null)} />
+                <div className="absolute top-full left-0 mt-1 w-56 bg-[#131B2E] border border-slate-700/80 rounded-lg shadow-2xl py-1 z-50">
+                  <div className="px-3 py-1 text-[10px] uppercase font-semibold text-slate-500 font-mono">
+                    Technical Documents
+                  </div>
+                  <button
+                    onClick={() => { onOpenHelpDoc('documentation'); setActiveMenu(null); }}
+                    className="w-full text-left px-3 py-1.5 hover:bg-indigo-600/20 hover:text-indigo-300 flex items-center gap-2"
+                  >
+                    <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                    <span>Documentation & Manual</span>
+                  </button>
+                  <button
+                    onClick={() => { onOpenHelpDoc('architecture'); setActiveMenu(null); }}
+                    className="w-full text-left px-3 py-1.5 hover:bg-indigo-600/20 hover:text-indigo-300 flex items-center gap-2"
+                  >
+                    <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Architecture Design</span>
+                  </button>
+                  <button
+                    onClick={() => { onOpenHelpDoc('components'); setActiveMenu(null); }}
+                    className="w-full text-left px-3 py-1.5 hover:bg-indigo-600/20 hover:text-indigo-300 flex items-center gap-2"
+                  >
+                    <Layers className="w-3.5 h-3.5 text-amber-400" />
+                    <span>Components Reference</span>
+                  </button>
+                  <div className="my-1 border-t border-slate-800" />
+                  <button
+                    onClick={() => { onOpenAbout(); setActiveMenu(null); }}
+                    className="w-full text-left px-3 py-1.5 hover:bg-indigo-600/20 hover:text-indigo-300 flex items-center gap-2"
+                  >
+                    <Info className="w-3.5 h-3.5 text-purple-400" />
+                    <span>About Vector Studio</span>
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
 
         {/* Undo / Redo Quick Buttons with Action Tooltips */}

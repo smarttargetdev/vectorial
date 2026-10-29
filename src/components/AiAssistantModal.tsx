@@ -110,7 +110,7 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-slate-100 text-sm">Gemini 4 Vector Studio</span>
+                <span className="font-bold text-slate-100 text-sm">Gemini 3.8 Flash Vector Studio</span>
                 <span className="px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-mono flex items-center gap-1">
                   <Cpu className="w-2.5 h-2.5" />
                   <span>Thinking: HIGH</span>
@@ -191,7 +191,7 @@ export const AiAssistantModal: React.FC<AiAssistantModalProps> = ({
             </div>
           ) : (
             <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-xl text-slate-300 text-xs leading-relaxed">
-              Gemini 4 will analyze your current canvas SVG, normalize decimal precision to 2 digits, remove redundant wrappers, and simplify bezier curves without visual degradation.
+              Gemini 3.8 Flash will analyze your current canvas SVG, normalize decimal precision to 2 digits, remove redundant wrappers, and simplify bezier curves without visual degradation.
             </div>
           )}
 

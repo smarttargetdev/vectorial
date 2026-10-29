@@ -1,0 +1,6 @@
+{
+  "name": "Vectura Studio",
+  "description": "Professional cross-platform SVG vector editor, bezier node manipulator, live XML synchronization, and keyframe motion graphics suite.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,29 @@
+{
+  "application": "Vector Studio",
+  "version": "1.0.5-genesis",
+  "releaseCodename": "genesis",
+  "major": 1,
+  "minor": 0,
+  "release": 5,
+  "buildTimestamp": "2026-10-29T18:00:55.776Z",
+  "targetPlatforms": [
+    "web",
+    "macos",
+    "windows",
+    "linux",
+    "ios",
+    "android"
+  ],
+  "androidApk": {
+    "fileName": "vector_studio-1.0.5-genesis.apk",
+    "filePath": "/app/applet/distribution/1.0.5-genesis/vector_studio-1.0.5-genesis.apk",
+    "fileSizeMb": "2.80",
+    "packageName": "com.vectorstudio.app"
+  },
+  "artifacts": [
+    "Components.md",
+    "Architecture.md",
+    "Documentation.md"
+  ],
+  "distributionPath": "/app/applet/distribution/1.0.5-genesis"
+}

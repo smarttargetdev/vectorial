@@ -135,7 +135,7 @@ app.post('/api/gemini/optimize-svg', async (req: Request, res: Response): Promis
 });
 
 app.get('/api/health', (_req: Request, res: Response) => {
-  res.json({ status: 'ok', service: 'Vectura Studio API' });
+  res.json({ status: 'ok', service: 'Vector Studio API' });
 });
 
 import fs from 'fs';
@@ -167,7 +167,7 @@ async function startServer() {
   }
 
   app.listen(port, '0.0.0.0', () => {
-    console.log(`Vectura Studio running at http://0.0.0.0:${port}`);
+    console.log(`Vector Studio running at http://0.0.0.0:${port}`);
   });
 }
 

@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { packageAndroidApk } from './package-apk';
+import { packageAndroidApk } from './package';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const rootDir = path.resolve(__dirname, '..');
-
-const VERSION_FILE = path.join(rootDir, '.version.json');
-const ARTIFACT_DIR = path.resolve('/.aistudio/artifacts/brain/20b9367b-9f23-4c50-8caa-bea9c65fb8b8');
+const buildScript = fileURLToPath(import.meta.url);
+const scriptsPath = path.dirname(buildScript);
+const rootPath = path.resolve(scriptsPath, '..');
+const versionsFile = path.resolve(rootPath, 'versioning.json');
+const systemIdentity = '20b9367b-9f23-4c50-8caa-bea9c65fb8b8';
+const artifactsPath = path.resolve(rootPath, '/.aistudio/artifacts/brain/');
 
 interface VersionState {
   major: number;
